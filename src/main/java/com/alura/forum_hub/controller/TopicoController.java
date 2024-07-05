@@ -25,13 +25,13 @@ public class TopicoController {
     private TopicoRepository repository;
 
     @Autowired
-    private TopicoService validador;
+    private TopicoService topicoService;
 
-    // Cadastro de Tópico já com o validador
+    // Cadastro de Tópico com validadores
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar (@RequestBody @Valid DadosCadastroTopico dados, UriComponentsBuilder uriBuilder) {
-        var topico = validador.cadastrar(dados);
+    public ResponseEntity<DadosDetalhamentoTopico> cadastrar (@RequestBody @Valid DadosCadastroTopico dados, UriComponentsBuilder uriBuilder) {
+        var topico = topicoService.cadastrar(dados);
 
         var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoTopico(topico));
@@ -39,8 +39,8 @@ public class TopicoController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoTopico dados) {
-        DadosDetalhamentoTopico topicoAtualizado = validador.atualizar(id, dados);
+    public ResponseEntity<DadosDetalhamentoTopico> atualizar(@PathVariable Long id, @RequestBody DadosAtualizacaoTopico dados) {
+        DadosDetalhamentoTopico topicoAtualizado = topicoService.atualizar(id, dados);
         return ResponseEntity.ok(topicoAtualizado);
     }
 
@@ -53,18 +53,16 @@ public class TopicoController {
 
     // Detalhar um Tópico Especifico
     @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id) {
-        var topico = validador.detalhar(id);
+    public ResponseEntity<DadosDetalhamentoTopico> detalhar(@PathVariable Long id) {
+        var topico = topicoService.detalhar(id);
         return ResponseEntity.ok(topico);
     }
 
     // Deletar um topico, exclusao logica apenas
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity excluir(@PathVariable Long id) {
-        var topico = repository.getReferenceById(id);
-        topico.excluir();
-
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        topicoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 }

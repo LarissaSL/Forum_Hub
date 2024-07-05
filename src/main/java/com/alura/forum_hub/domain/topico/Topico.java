@@ -39,10 +39,10 @@ public class Topico {
     @ElementCollection
     private List<String> respostas;
 
-    public Topico(DadosCadastroTopico dados) {
+    public Topico(DadosCadastroTopico dados, String autor) {
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
-        this.autor = dados.autor();
+        this.autor = autor;
         this.curso = dados.curso();
         this.status = Status.NAO_RESPONDIDO;
         this.dataCriacao = LocalDateTime.now();
