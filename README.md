@@ -21,12 +21,20 @@ OBS.: As Migrations irão criar as Tabelas necessárias
 Em `application.properties`, configure as seguintes propriedades com os valores apropriados para a sua instalação do MySQL:
 
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/forum_hub
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.format-sql=true
+spring.application.name=forum_hub
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost/forum_hub
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+
+server.error.include-stacktrace=never
+
+api.security.token.secret=${JWT_SECRET}
+```
+OBS.: Caso não tenha essas variaveis de ambiente definidas por favor escreve as configurações ex.:
+```properties
+spring.datasource.username=seuUsername
 ```
 
 ### 🖥️ 2. Utilizando a Aplicação
