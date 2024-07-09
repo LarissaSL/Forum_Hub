@@ -69,7 +69,7 @@ Habilite nas rotas o Cabeçalho de autenticacao e cole o Token gerado
 | DELETE | /topicos/{id}  | Exclusão de um tópico          | N/A                         |
 | POST   | /login         | Autenticação de usuários       | "login": "seuLogin", "senha": "suaSenha" |
 
-⌨️ **Desenvolvimento**
+### ⌨️ **Desenvolvimento**
 
 Passos seguidos para o Desenvolvimento:
 
@@ -87,7 +87,7 @@ Passos seguidos para o Desenvolvimento:
    
 6. Testes finais e ajustes.
 
-📚 **Tecnologias Utilizadas**
+### 📚 **Tecnologias Utilizadas**
 
 - Java 17
 
